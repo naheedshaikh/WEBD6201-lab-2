@@ -7,6 +7,7 @@
 * My Github Link:  https://github.com/naheedshaikh/WEBD6201-lab-2.git 
 */
 
+// JavaScript Class named Contact
 class Contact
 {
     constructor(contactName = "", emailAddress = "", contactNumber = "", contactMessage = "")
@@ -18,7 +19,18 @@ class Contact
     }
 }
 
-
+// JavaScript Class named User
+class User
+{
+    constructor(firstName = "", lastName = "", userName = "", email = "", password = "")
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+    }
+}  
 
 
 "use strict";
