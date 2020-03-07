@@ -329,7 +329,23 @@ let app;
             $(selector)[0].reset();
             $("#errorMessage").hide();
         }
-        
+
+    // function to display or hide error messages depending on user input and condition
+    function validateInput(selector, condition, errorMessage)
+    {
+        if(condition)
+        {
+            $("#errorMessage").show();
+            $("#errorMessage").text(errorMessage);
+            $(selector).select();
+            $(selector).css("border", "2px solid red");
+        }
+        else
+        {
+            $("#errorMessage").hide();
+            $(selector).css("border", "1px solid #ced4da");
+        }
+    }
     /**
      * Main Program entry point is here
      *
