@@ -264,22 +264,56 @@ let app;
     {
         document.title = "WEBD6201 - Login";
 
+        
+        $("#errorMessage").hide();
+        $("#contactName").select();
+
+        // User Name Events
+        $("#contactName").blur((e)=>
+        {
+            validateInput("#contactName",( $("#contactName").val().length < 4),"Username is Too Short");
+        });
+
+        $("#contactName").focus((e)=>
+        {
+            $("#contactName").select();
+        });
+
+        // Password Events
+        $("#password").blur((e)=>
+        {
+            validateInput("#password",($("#password").val().length < 6), " Password is too short ");
+        });
+
+        $("#emailAddress").focus((e)=>
+        {
+            $("#emailAddress").select();
+        });
+       
         $("#loginForm").submit  ((e)=>
         {
-           
-            e.preventDefault();
-            e.stopPropagation();
-
             //userName show at the nevbar after contact us element
-            let contactName = $('input#contactName').val();
-            
-            $("#login").before ($("<li>").addClass("navbar-text").text('Welcome '+ contactName)).show();
-            console.log(contactName);
-            
-            $("#loginForm")[0].reset();
-            $("#login").hide();
-            $("#logout").show();
+            let userName = $('input#contactName').val();
+            User.userName = userName;
 
+            if($("#loginForm")[0].checkValidity() == false)
+            {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log("form not valid");
+            }
+            else
+            {
+                e.preventDefault();
+                e.stopPropagation();
+                $("#loginForm")[0].reset();
+                $("#login").hide();
+                $("#logout").show();
+                
+                $("#login").before ($("<li>").addClass("navbar-text").text('Welcome '+ userName)).show();
+                console.log(userName);
+            }
+            clearForm($("#loginForm"));
         });
 
     }
@@ -289,6 +323,13 @@ let app;
         document.title = "WEBD6201 - Register";
     }
 
+    // function to clear all the inputs 
+    function clearForm(selector)
+        {
+            $(selector)[0].reset();
+            $("#errorMessage").hide();
+        }
+        
     /**
      * Main Program entry point is here
      *
