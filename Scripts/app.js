@@ -1,3 +1,12 @@
+/**
+* Name: Heather Grandovec
+* Id: 100478347
+* Description: Lab 2 - jQuery & Form Validation
+* Date Completed: 06-MAR-2020 
+* Source Code:https://github.com/durhamprogrammer/WEBD6201-W2020-Lesson6 
+* My Github Link:  https://github.com/naheedshaikh/WEBD6201-lab-2.git 
+*/
+
 class Contact
 {
     constructor(contactName = "", emailAddress = "", contactNumber = "", contactMessage = "")
