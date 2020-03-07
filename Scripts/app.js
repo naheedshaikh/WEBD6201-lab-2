@@ -247,6 +247,13 @@ let app;
            
             e.preventDefault();
             e.stopPropagation();
+
+            //userName show at the nevbar after contact us element
+            let contactName = $('input#contactName').val();
+            
+            $("#login").before ($("<li>").addClass("navbar-text").text(contactName)).show();
+            console.log(contactName);
+            
             $("#loginForm")[0].reset();
             $("#login").hide();
             $("#logout").show();
