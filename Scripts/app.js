@@ -318,9 +318,124 @@ let app;
 
     }
 
+    /** 
+     * register Page started from here
+     * Added all the validation , error message , confirm password and @ sign include in email
+    */
     function DisplayRegisterContent()
     {
         document.title = "WEBD6201 - Register";
+
+        let errorMessage = $("<div>").attr("id", "errorMessage").addClass("alert alert-danger");
+        $(".hint-text").append(errorMessage);
+
+       $("#errorMessage").hide();
+      
+        $("#firstName").select();
+     // First Name Event
+    $("#firstName").blur((e)=>
+    {
+        validateInput("#firstName",( $("#firstName").val().length < 2),"First Name is too short.");
+    });
+
+    $("#firstName").focus((e)=>
+    {
+        $("#firstName").select();
+    });
+
+    // Last Name Event
+    $("#lastName").blur((e)=>
+    {
+        validateInput("#lastName",( $("#lastName").val().length < 2),"Last Nameis too short.");
+    });
+
+    $("#lastName").focus((e)=>
+    {
+        $("#lastName").select();
+    });
+
+    // Email Event
+    $("#emailAddress").blur((e)=>
+    {
+        validateInput("#emailAddress",($("#emailAddress").val().length < 2) || (!$("#emailAddress").val().includes("@")),"Invalid Email Address");
+    });
+
+    $("#emailAddress").focus((e)=>
+    {
+        $("#emailAddress").select();
+    });
+
+    // Username Events
+    $("#username").blur((e)=>
+    {
+        validateInput("#username",( $("#username").val().length < 2),"User name must not be less then 2 characters.");
+    });
+
+    $("#userame").focus((e)=>
+    {
+        $("#userame").select();
+    });
+
+    // Password Events
+    $("#password").blur((e)=>
+    {
+        validateInput("#password",($("#password").val().length < 2),"Password must be atleast 6 characters in length.");
+    });
+
+    $("#password").focus((e)=>
+    {
+        $("#password").select();
+    });
+
+    // Confirm Password Events
+    $("#confirmPassword").blur((e)=>
+    {
+        let userPassword = $("#confirmPassword").val();
+        let confirmUserPass = $("#password").val();
+        validateInput("#confirmPassword",(confirmUserPass != userPassword),"Confirm Password must match the Password.");
+    });
+
+    $("#confirmPassword").focus((e)=>
+    {
+        $("#confirmPassword").select();
+    });
+ 
+    $("#registerForm").submit ((e)=>
+    {
+        let firstName = $("#firstName").val();
+        let lastName = $("#lastName").val();
+        let emailAddress = $("#emailAddress").val();
+        let username = $("#username").val();
+        let password = $("#password").val();
+        
+        User.firstName = firstName;
+        User.lastName = lastName;
+        User.emailAddress = emailAddress;
+        User.username = username;
+        User.password = password;
+
+        console.log(`Name: ${firstName}` + ` ${lastName}`);
+        console.log(`Email Address: ${emailAddress}`);
+        console.log(`Username: ${username}`);
+
+        if($("#registerForm")[0].checkValidity() == false)
+        {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log("form not valid");
+        }
+        else
+        {
+            e.preventDefault();
+            e.stopPropagation();
+            $("#registerForm")[0].reset();
+            $("#login").show();
+            $("#logout").hide();
+        }
+
+    clearForm($("#registerForm"));
+});
+
     }
 
     // function to clear all the inputs 
